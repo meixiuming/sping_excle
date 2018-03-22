@@ -1,0 +1,69 @@
+server:
+    port: 8080
+
+##数据库配置
+spring:  
+    thymeleaf:
+        suffix: .html                         #网页后缀名
+        mode: HTML5                           #网页类型
+        prefix: classpath:/templates/         #网页所在路径
+        encoding: UTF-8                       #网页编码格式
+        content-type: text/html               #web容器类型
+    datasource:  
+        url:  jdbc:mysql://localhost:3306/liu?characterEncoding=utf-8&useSSL=false
+        username:  root
+        password:  630227
+        # 使用druid数据源
+#        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+#        filters: stat
+#        maxActive: 20
+#        initialSize: 1
+#        maxWait: 60000
+#        minIdle: 1
+#        timeBetweenEvictionRunsMillis: 60000
+#        minEvictableIdleTimeMillis: 300000
+#        validationQuery: select 'x'
+#        testWhileIdle: true
+#        testOnBorrow: false
+#        testOnReturn: false
+#        poolPreparedStatements: true
+#        maxOpenPreparedStatements: 20
+    ## Redis 配置
+## Redis数据库索引（默认为0）
+    redis: 
+        database: 0
+## Redis服务器地址
+        host:  127.0.0.1
+## Redis服务器连接端口
+        port:  6379
+## Redis服务器连接密码（默认为空）
+        password: 
+## 连接超时时间（毫秒）
+        timeout:  0
+## 连接池最大连接数（使用负值表示没有限制）
+        pool:  
+            max-active:  8
+## 连接池最大阻塞等待时间（使用负值表示没有限制）
+            max-wait:  -1
+## 连接池中的最大空闲连接
+            max-idle:  8
+## 连接池中的最小空闲连接
+            min-idle:  0
+mybatis:
+    mapper-locations: classpath:mapping/*.xml
+    type-aliases-package: com.excle.dao
+    
+ #上传文件大小设置
+multipart: 
+    maxFileSize:  500Mb
+    maxRequestSize:  500Mb
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: 
+        count:  countSql 
+    

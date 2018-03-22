@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--目的：为Dao接口方法提供SQL语句-->
+<mapper namespace="com.excle.dao.ExcleDao">
+ 	<!--映射实体对象-->
+    <resultMap id="excleMap" type="com.excle.domain.Excle">
+        <id property="id" column="id"/>
+        <result property="NO" column="NO"/>
+        <result property="smt" column="SMT"/>
+        <result property="ffo" column="FFO"/>
+        <result property="partName" column="PARTNAME"/>
+        <result property="reqmTNo" column="REQMTNO"/>
+        
+        <result property="procedureNo" column="PROCEDURENO"/>
+        <result property="procedureTitle" column="PROCEDURETITLE"/>
+        <result property="reg" column="REG"/>
+        
+   <!-- 
+   		<collection property="roles" ofType="com.us.example.domain.SysRole">
+            <result column="name" property="name"/>
+        </collection>
+	-->
+	</resultMap>
+	<parameterMap id="Excle" type="com.excle.domain.Excle"/>
+	
+    <select id="findAll" parameterType="String" resultMap="excleMap" >
+       select * from excle
+    </select>
+    <!--  
+    <insert id="saveOrUpdate" >
+       if exists(select NO from excle where NO = #{no,jdbcType=VARCHAR})
+       update excle  SET
+        	 NO            =	#{no,jdbcType=VARCHAR},
+        	 SMT           =	#{smt,jdbcType=VARCHAR},
+        	 FFO           =	#{ffo,jdbcType=VARCHAR},
+        	 PARTNAME      =	#{pratName,jdbcType=VARCHAR},
+        	 REQMTNO       =	#{reqmTNo,jdbcType=VARCHAR},
+        	 REQMTTITLE    =	#{reqmTTitle,jdbcType=VARCHAR},
+       		 PROCEDURENO   =	#{procedureNo,jdbcType=VARCHAR},
+       		 PROCEDURETITLE=	#{procedureTitle,jdbcType=VARCHAR},
+       		 REG           =	#{reg,jdbcType=VARCHAR}   
+       where NO            =	#{no,jdbcType=VARCHAR};  
+       else   
+       insert into excle(NO,SMT,FFO,PARTNAME,REQMTNO,REQMTTITLE,PROCEDURENO,PROCEDURETITLE,REG)   
+       values (	
+       			#{no,jdbcType=VARCHAR},
+				#{smt,jdbcType=VARCHAR},
+        		#{ffo,jdbcType=VARCHAR},
+        		#{pratName,jdbcType=VARCHAR},
+        		#{reqmTNo,jdbcType=VARCHAR},
+        		#{reqmTTitle,jdbcType=VARCHAR},
+       			#{procedureNo,jdbcType=VARCHAR},
+       		 	#{procedureTitle,jdbcType=VARCHAR},
+       		    #{reg,jdbcType=VARCHAR}
+       		   ); 
+    </insert>
+    -->
+    <select id="findByNo" parameterType="String" resultMap="excleMap" >
+       select * from excle where no=#{NO,jdbcType=VARCHAR}
+    </select>
+    <delete id="remove" ></delete>
+    <update id="update" parameterType="com.excle.domain.Excle">
+    	update excle  SET
+        	 NO            =	#{NO,jdbcType=VARCHAR},
+        	 SMT           =	#{smt,jdbcType=VARCHAR},
+        	 FFO           =	#{ffo,jdbcType=VARCHAR},
+        	 PARTNAME      =	#{partName,jdbcType=VARCHAR},
+        	 REQMTNO       =	#{reqmTNo,jdbcType=VARCHAR},
+        	 
+       		 PROCEDURENO   =	#{procedureNo,jdbcType=VARCHAR},
+       		 PROCEDURETITLE=	#{procedureTitle,jdbcType=VARCHAR},
+       		 REG           =	#{reg,jdbcType=VARCHAR}   
+       where NO            =	#{NO,jdbcType=VARCHAR};
+    </update>
+    <insert id="save"  parameterType="com.excle.domain.Excle">
+    	insert into excle(NO,SMT,FFO,PARTNAME,REQMTNO,PROCEDURENO,PROCEDURETITLE,REG)   
+       	values (	
+       			#{NO,jdbcType=VARCHAR},
+				#{smt,jdbcType=VARCHAR},
+        		#{ffo,jdbcType=VARCHAR},
+        		#{partName,jdbcType=VARCHAR},
+        		#{reqmTNo,jdbcType=VARCHAR},
+        		
+       			#{procedureNo,jdbcType=VARCHAR},
+       		 	#{procedureTitle,jdbcType=VARCHAR},
+       		    #{reg,jdbcType=VARCHAR}
+       		   );
+    </insert>
+</mapper>
